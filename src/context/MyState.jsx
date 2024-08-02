@@ -71,7 +71,7 @@ function MyState(props) {
         setGetProduct(productsArray);
       });
       return () => data;
-    } catch (error) {}
+    } catch (error) { }
     console.log(error);
   };
 
@@ -108,6 +108,57 @@ function MyState(props) {
     }
   };
 
+
+  const [order, setOrder] = useState([]);
+
+  const getOrderData = async () => {
+    
+    try {
+      const result = await getDocs(collection(fireDB, "orders"))
+      const ordersArray = [];
+      result.forEach((doc) => {
+        ordersArray.push(doc.data());
+        
+      });
+      setOrder(ordersArray);
+      console.log(ordersArray);
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
+  const [user, setUser] = useState([]);
+
+  const getUserData = async () => {
+   
+    try {
+      const result = await getDocs(collection(fireDb, "user"))
+      const usersArray = [];
+      result.forEach((doc) => {
+        usersArray.push(doc.data());
+       
+      });
+      setUser(usersArray);
+      console.log(usersArray)
+      setLoading(false);
+    } catch (error) {
+      console.log(error)
+     
+    }
+  }
+
+
+  useEffect(() => {
+    getProductData();
+    getOrderData()
+    getUserData();
+  }, []);
+
+  const [searchkey, setSearchkey] = useState('')
+  const [filterType, setFilterType] = useState('')
+
   return (
     <MyContext.Provider
       value={{
@@ -118,6 +169,13 @@ function MyState(props) {
         edithandle,
         updateProduct,
         deleteProduct,
+        order,
+        user,
+        searchkey,
+        setSearchkey,
+        filterType,
+        setFilterType,
+
       }}
     >
       {props.children}

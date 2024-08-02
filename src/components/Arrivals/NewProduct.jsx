@@ -87,7 +87,7 @@ const NewProduct = () => {
               <h5>{item.description}</h5>
               <h4>${item.price}</h4>
             </div>
-            <Link to="/cart" className="cart">
+            <Link className="cart">
               {" "}
               <MdOutlineAddShoppingCart className="m-[10px] text-xl" />{" "}
             </Link>

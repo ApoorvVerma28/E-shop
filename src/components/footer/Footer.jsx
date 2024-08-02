@@ -47,12 +47,7 @@ const Footer = () => {
           >
             Shop
           </NavLink>
-          <NavLink
-            to="/about"
-            className="text-soft-pink hover:text-[#088178] text-xl"
-          >
-            Contact
-          </NavLink>
+         
         </nav>
       </div>
       <div className="text-center mt-6">

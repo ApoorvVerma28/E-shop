@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addToCart } from "../../redux/CartSlice";
 
+
 function HomeProduct() {
   const context = useContext(MyContext);
  const {getProduct} = context;
@@ -34,7 +35,7 @@ useEffect(() => {
         </div>
         <div className="sm:col-span-1 flex flex-wrap justify-between ">
           {getProduct.map((item,index)=>{
-               const { title, price, description, imageUrl } = item;
+               const { title, price, description, imageUrl,id } = item;
             return (
               <div key={index} className="pro">
             <img className="w-[100px] h-[280px]" src={imageUrl} alt="" />
@@ -49,7 +50,7 @@ useEffect(() => {
             </div>
             <Link to="/productinfo/:id">
               {" "}
-              <button className="w-[100px] h-[30px] bg-[#088178] active:scale-105 text-white px-3 pb-1 hover:bg-[#1a5a56ee]  rounded-2xl ">
+              <button  onClick={()=> window.location.href = `/productinfo/${id}`} className="w-[100px] h-[30px] bg-[#088178] active:scale-105 text-white px-3 pb-1 hover:bg-[#1a5a56ee]  rounded-2xl ">
                 More
               </button>
             </Link>

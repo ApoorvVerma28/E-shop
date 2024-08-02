@@ -35,11 +35,7 @@ const cartItems = useSelector((state) => state.cart)
                 Blog
               </h1>
             </NavLink>
-            <NavLink to="/about">
-              <h1 className="font-semibold text-[20px] text-[#1a1a1a] transition-all hover:text-[#088178] ">
-                About
-              </h1>
-            </NavLink>
+            
           </div>
          
           <div className="flex items-center gap-x-10 ">

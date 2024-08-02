@@ -14,7 +14,6 @@ import UpdateProduct from "./pages/updateproduct.jsx/UpdateProduct";
 import Cart from "./pages/cart/Cart";
 import Order from "./pages/Orders/Order";
 import ProductInfo from "./pages/productInfo/ProductInfo";
-import About from "./components/about/About";
 import LocomotiveScroll from 'locomotive-scroll';
 
 function App() {
@@ -27,7 +26,6 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/shop" element={<AllProducts />} />
