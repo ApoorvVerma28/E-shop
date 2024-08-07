@@ -22,7 +22,7 @@ const cartItems = useSelector((state) => state.cart)
           <div className=" flex items-center  gap-x-10">
             <NavLink to="/" >
               <h1 className="text-4xl font-extrabold " >
-                Logo
+                E-shop
               </h1>
             </NavLink>
             <NavLink to="/shop">
