@@ -49,7 +49,7 @@ function MyState(props) {
         setTimeout(() => {
           window.location.href = "/dashboard";
         }, 800);
-        console.lo(products);
+        console.log(products);
         getProductData();
         setProducts("");
         closeModal();
@@ -134,7 +134,7 @@ function MyState(props) {
   const getUserData = async () => {
    
     try {
-      const result = await getDocs(collection(fireDb, "user"))
+      const result = await getDocs(collection(fireDB, "user"))
       const usersArray = [];
       result.forEach((doc) => {
         usersArray.push(doc.data());
