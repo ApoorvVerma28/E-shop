@@ -45,7 +45,17 @@ function MyState(props) {
       try {
         const productRef = collection(fireDB, "Products");
         await addDoc(productRef, products);
-        toast.success("Product Add successfully");
+        toast.success("Product Add successfully",
+          {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        );
         setTimeout(() => {
           window.location.href = "/dashboard";
         }, 800);
@@ -54,7 +64,17 @@ function MyState(props) {
         setProducts("");
         closeModal();
       } catch (error) {
-        toast.error(error.msg);
+        toast.error(error.msg,
+          {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        );
       }
     }
   };
@@ -86,74 +106,76 @@ function MyState(props) {
   const updateProduct = async (products) => {
     try {
       await setDoc(doc(fireDB, "Products", products.id), products);
-      toast.success("Updated Successfully");
+      toast.success("Updated Successfully",
+        {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
       setTimeout(() => {
         window.location.href = "/dashboard";
       }, 800);
       getProductData();
     } catch (error) {
       console.log(error);
-      toast.error("Failed to update product");
+      toast.error("Failed to update product",
+        {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
     }
   };
 
   const deleteProduct = async (item) => {
     try {
       await deleteDoc(doc(fireDB, "Products", item.id));
-      toast.success("Deleted Successfully");
+      toast.success("Deleted Successfully",
+        {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
       getProductData();
     } catch (error) {
       console.log(error);
-      toast.error("Failed to delete product");
+      toast.error("Failed to delete product",
+        {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
     }
   };
 
 
-  const [order, setOrder] = useState([]);
 
-  const getOrderData = async () => {
-    
-    try {
-      const result = await getDocs(collection(fireDB, "orders"))
-      const ordersArray = [];
-      result.forEach((doc) => {
-        ordersArray.push(doc.data());
-        
-      });
-      setOrder(ordersArray);
-      console.log(ordersArray);
-      
-    } catch (error) {
-      console.log(error);
-      
-    }
-  }
 
-  const [user, setUser] = useState([]);
-
-  const getUserData = async () => {
-   
-    try {
-      const result = await getDocs(collection(fireDB, "user"))
-      const usersArray = [];
-      result.forEach((doc) => {
-        usersArray.push(doc.data());
-       
-      });
-      setUser(usersArray);
-      console.log(usersArray)
-      setLoading(false);
-    } catch (error) {
-      console.log(error)
-     
-    }
-  }
 
 
   useEffect(() => {
     getProductData();
-    getOrderData()
-    getUserData();
+ 
   }, []);
 
   const [searchkey, setSearchkey] = useState('')
@@ -169,8 +191,6 @@ function MyState(props) {
         edithandle,
         updateProduct,
         deleteProduct,
-        order,
-        user,
         searchkey,
         setSearchkey,
         filterType,

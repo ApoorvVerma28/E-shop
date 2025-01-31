@@ -33,7 +33,17 @@ const ProductInfo = () => {
 
     const addCart = (products) => {
         dispatch(addToCart(products));
-        toast.success('Added to cart');
+        toast.success('added to cart',
+            {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              }
+        );
     };
 
     useEffect(() => {

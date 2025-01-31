@@ -12,7 +12,7 @@ const EmailRes = () => {
           <span> Special Offer.</span>
         </p>
       </div>
-      <div class="form">
+      <div className="form">
         <input type="text" placeholder="Your Email" />
         <button className="normal px-5">Get Updates</button>
       </div>

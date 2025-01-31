@@ -30,11 +30,7 @@ const cartItems = useSelector((state) => state.cart)
                 Shop
               </h1>
             </NavLink >
-            <NavLink to="/productinfo/:id">
-              <h1 className="font-semibold text-[20px] text-[#1a1a1a] transition-all hover:text-[#088178] ">
-                Blog
-              </h1>
-            </NavLink>
+           
             
           </div>
          

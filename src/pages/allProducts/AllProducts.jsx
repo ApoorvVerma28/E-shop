@@ -3,6 +3,7 @@ import Layout from "../../components/layout/Layout";
 import { useContext } from "react";
 import MyContext from "../../context/MyContext";
 
+
 // productData 
 
 
@@ -51,12 +52,12 @@ const AllProduct = () => {
                         <div className="flex flex-wrap -m-4">
                             {getProduct.filter((obj) => obj.title.includes(searchkey))
                         .filter((obj) => obj.title.includes(filterType)).map((item, index) => {
-                                const { imageUrl, title, price,description } = item
+                                const { imageUrl, title, price,description,id } = item
                                 return (
                                     <div key={index} className="p-4 w-full md:w-1/4">
                                         <div className="h-full border border-gray-300 rounded-xl overflow-hidden shadow-md cursor-pointer">
                                             <img
-                                                onClick={() => navigate('/productinfo/:id')}
+                                                onClick={() => navigate(`/productinfo/${id}`)}
                                                 className="lg:h-50  h-50 w-full"
                                                 src={imageUrl}
                                                 alt="blog"

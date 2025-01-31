@@ -2,7 +2,7 @@ import Layout from "../../components/layout/Layout";
 import { CiTrash } from "react-icons/ci";
 import Modal from "../../components/Modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteFromCart } from "../../redux/CartSlice";
+import { deleteFromCart,deleteAllCart } from "../../redux/CartSlice";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 
@@ -11,17 +11,21 @@ const CartPage = () => {
   const deleteCart = (item) => {
     dispatch(deleteFromCart(item)); // Dispatch the action to delete item from cart
     localStorage.removeItem("cart");
-    toast.success("Deleted Cart Item");
+    toast.success("Deleted Cart Item",
+      {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
   };
   const cartItems = useSelector((state) => state.cart);
   const [totalAmount, setTotalAmount] = useState(0);
-  useEffect(() => {
-    let temp = 0;
-    cartItems.forEach((cartItems) => {
-      temp = temp + parseInt(cartItems.price);
-    });
-    setTotalAmount(temp);
-  }, [cartItems]);
+ 
   const shipping = parseInt(100);
   const grandTotal = shipping + totalAmount;
 
@@ -29,6 +33,9 @@ const CartPage = () => {
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
+
+ 
+  
 
   const buyNow = async () => {
     // validation 
@@ -58,56 +65,48 @@ const CartPage = () => {
         }
       )
     }
-    console.log(addressInfo)
-
-    var options = {
-      key: "rzp_test_fWMflLeZ9A8pLD",
-      key_secret: "nWvqCnxa8CdqeOOskwNN2v3o",
-      amount: parseInt(grandTotal * 100),
-      currency: "INR",
-      order_receipt: 'order_rcptid_' + name,
-      name: "E-Bharat",
-      description: "for testing purpose",
-      handler: function (response) {
-        // console.log(response)
-        toast.success('Payment Successful')
-        const paymentId = response.razorpay_payment_id
-        // store in firebase 
-        const orderInfo = {
-          cartItems,
-          addressInfo,
-          date: new Date().toLocaleString(
-            "en-US",
-            {
-              month: "short",
-              day: "2-digit",
-              year: "numeric",
-            }
-          ),
-          email: JSON.parse(localStorage.getItem("user")).user.email,
-          userid: JSON.parse(localStorage.getItem("user")).user.uid,
-          paymentId
-        }
-
-        try {
-          const result = addDoc(collection(fireDB, "orders"), orderInfo)
-        } catch (error) {
-          console.log(error)
-        }
-      },
-
-      theme: {
-        color: "#3399cc"
+    toast.success(
+      <div>
+        <h3 className=' text-[13px]'>Order Successful!</h3>
+        <p style={{ margin: "4px 0", fontSize: "13px" }}>
+                        Hey <b>{addressInfo.name}</b>, <br />
+                        Your order:
+                        {cartItems.map((data, i) => (
+                          <span key={i} style={{ display: "block", fontWeight: "bold",fontSize: "13px" }}>
+                            {data.title}.
+                          </span>
+                        ))}
+                      </p>
+                      <p style={{ fontSize: "13px",  }}>Sit back & relax, it’ll be delivered soon! </p>
+                      <p className='d text-[13px]'>Thank You..</p>
+      
+        
+      </div>,
+      {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       }
+    );
+    setTimeout(()=>{
+      dispatch(deleteAllCart()); 
 
+    },2000)
 
-    };
-    var pay = new window.Razorpay(options);
-    pay.open();
-    console.log(pay)
+  
   }
 
-
+  useEffect(() => {
+    let temp = 0;
+    cartItems.forEach((cartItems) => {
+      temp = temp + parseInt(cartItems.price);
+    });
+    setTotalAmount(temp);
+  }, [cartItems]);
 
   return (
     <Layout>
@@ -149,7 +148,7 @@ const CartPage = () => {
 
                             <div className="mt-1 flex items-end">
                               <p className="text-sm font-medium text-gray-900">
-                                &nbsp;&nbsp;${item.price}
+                                &nbsp;&nbsp;₹{item.price}
                               </p>
                               &nbsp;&nbsp;
                               <p className="text-sm font-medium text-green-500">
@@ -196,7 +195,7 @@ const CartPage = () => {
                   <div className="flex items-center justify-between">
                     <dt className="text-sm text-gray-800">Price ({cartItems.length})</dt>
                     <dd className="text-sm font-medium text-gray-900">
-                      ${totalAmount}
+                    ₹{totalAmount}
                     </dd>
                   </div>
 
@@ -204,14 +203,14 @@ const CartPage = () => {
                     <dt className="flex text-sm text-gray-800">
                       <span>Delivery Charges</span>
                     </dt>
-                    <dd className="text-sm font-medium text-green-700">${shipping}</dd>
+                    <dd className="text-sm font-medium text-green-700">₹{shipping}</dd>
                   </div>
                   <div className="flex items-center justify-between border-y border-dashed py-4 ">
                     <dt className="text-base font-medium text-gray-900">
                       Total Amount
                     </dt>
                     <dd className="text-base font-medium text-gray-900">
-                      ${grandTotal}
+                    ₹{grandTotal}
                     </dd>
                   </div>
                 </dl>

@@ -35,13 +35,15 @@ const Footer = () => {
           </div>
         </div>
         <nav className="flex space-x-4 mt-4 md:mt-0 font-semibold">
-          <a
+          <NavLink to="/"
+          onClick={() => window.scrollTo(0, 0)}
             href="#"
             className="text-soft-pink hover:text-[#088178] text-xl"
           >
             Home
-          </a>
+          </NavLink>
           <NavLink
+          onClick={() => window.scrollTo(0, 0)}
             to ="/shop"
             className="text-soft-pink hover:text-[#088178] text-xl"
           >

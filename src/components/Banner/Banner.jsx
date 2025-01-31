@@ -11,13 +11,13 @@ const NewPro = () => {
         <h4>Crazy Deals</h4>
         <h2>Buy 1 get 1 free</h2>
         <span>The best classic dress is on sale at Cara</span>
-        <Link to="/blog"><button className="text-white px-5 border-[1px] border-white py-2">Leran More</button></Link> 
+        <button className="text-white px-5 border-[1px] border-white py-2">Leran More</button>
       </div>
       <div className="banner-box banner-box2">
         <h4>spring/Summer</h4>
         <h2>Upcoming season</h2>
         <span>The best classic dress is on sale at Cara</span>
-       <Link to="/shop"><button className="text-white px-5 border-[1px] border-white py-2">Collection</button></Link> 
+      <button className="text-white px-5 border-[1px] border-white py-2">Collection</button> 
       </div>
     </div>
     <section id="banner3">

@@ -85,7 +85,7 @@ const NewProduct = () => {
             <div className="des">
               <span>{item.title}</span>
               <h5>{item.description}</h5>
-              <h4>${item.price}</h4>
+              <h4>₹{item.price}</h4>
             </div>
             <Link className="cart">
               {" "}
